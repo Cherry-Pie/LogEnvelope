@@ -1,0 +1,18 @@
+{
+    "name": "yaro/log-envelope",
+    "description": "Laravel 5 email on error",
+    "keywords": ["laravel", "log", "error", "mail on error"],
+    "autoload": {
+        "psr-4": {
+            "Yaro\\LogEnvelope\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yaro",
+            "email": "12fcv4@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
