@@ -11,7 +11,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/log-envelope.php' => config_path('yaro.log-envelope.php'),
+            __DIR__.'/../config/log-envelope.php' => config_path('yaro.log-envelope.php'),
         ]);
         
         $this->app['view']->addNamespace('log-envelope', __DIR__ . '/../resources/views');
