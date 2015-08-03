@@ -24,7 +24,7 @@ Then publish the config file of the package using artisan.
 php artisan vendor:publish --provider="Yaro\LogEnvelope\ServiceProvider"
 ```
 
-And put receiver name to it.
+>And put receiver email to it.
 
 
 Add to your Exception Handler's (```/app/Exceptions/Handler.php``` by default) ```report``` method these lines:
