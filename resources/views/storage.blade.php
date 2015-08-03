@@ -1,6 +1,6 @@
 
-<tr style="border-bottom: #B0FFFF 1px solid;">
-    <td style="vertical-align: top; padding: 15px 50px; background: #272727; color: #dddddd; border-right: #B0FFFF 1px solid;">
+<tr style="border-bottom: #f4645f 1px solid;">
+    <td style="vertical-align: top; padding: 15px 50px; background: #272727; color: #dddddd; border-right: #f4645f 1px solid;">
         {{ $caption }}
     </td>
     <td style="width: 100%; background: #272727; padding: 2px 10px;">
