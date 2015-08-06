@@ -17,6 +17,7 @@ class LogEnvelope
         $this->config['except'] = config('yaro.log-envelope.except', []);
         $this->config['email_to'] = config('yaro.log-envelope.email_to');
         $this->config['email_from'] = config('yaro.log-envelope.email_from');
+        $this->config['count'] = config('yaro.log-envelope.lines_count', 12);
         
         if (!$this->config['email_from']) {
             $this->config['email_from'] = 'log-envelop@'. Request::server('SERVER_NAME');
@@ -84,8 +85,33 @@ class LogEnvelope
         
         $data['storage'] = array_filter($data['storage']);
         
+        $count = $this->config['count'];
+        $lines = file($data['file']);
+        $data['exegutor'] = [];
+        
+        for ($i = -1 * abs($count); $i <= abs($count); $i++) {
+            $data['exegutor'][] = $this->getLineInfo($lines, $data['line'], $i);
+        }
+        $data['exegutor'] = array_filter($data['exegutor']);
+        
         return $data;
     } // end getEmailData
+    
+    private function getLineInfo($lines, $line, $i)
+    {
+        $currentLine = $line + $i;
+        // cuz array starts with 0, when file lines start count from 1
+        $index = $currentLine - 1;
+        
+        if (!array_key_exists($index, $lines)) {
+            return;
+        }
+        return [
+            'line' => $currentLine .'. '. $lines[$index],
+            'wrap_left' => $i ? '' : '<span style="color: #F5F5F5; background-color: #5A3E3E; width: 100%; display: block;">',
+            'wrap_right' => $i ? '' : '</span>',
+        ];
+    }
 
 }
 

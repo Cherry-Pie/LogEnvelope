@@ -6,19 +6,23 @@
     </head>
     <body style="margin: 0px; padding: 0px;">
         <div style="padding: 10px; background-color: #f4645f; color: white;">
-            <h4 style="margin: 0; font-weight: 100;">
-                <div style="float:right;">{{ $file }}::{{ $line }}</div>
+            <h4 style="margin: 0 0 0 0; font-weight: 100;">
                 <div>[{{ $method }}]: {{ $fullUrl }}</div>
             </h4>
-            <h1 style="margin: 0; font-size: 3em;">
+            <h1 style="margin: 0 0 0 0; font-size: 3em;">
                 {{ $class }}
                 <br>
                 {{ $exception }}
-            </h1>
+            </h1> 
         </div>
-        <pre style="margin: 0; background: #272727; color: #aaaaaa; font-family: monospace; font-size: 12px; padding: 5px 12px; white-space: pre-wrap; word-break: break-word;">{{ $error }}</pre>
+        <div style="border-top: 1px solid #272727; border-bottom: 1px solid #F4645F; background-color: #F4645F; color: #ffffff; padding: 5px 5px 5px 5px;">{{ $file }}</div>
+        <pre style="margin: 0 0 0 0; background: #272727; color: #aaaaaa; font-family: monospace; font-size: 12px; padding: 5px 12px; white-space: pre-wrap; word-break: break-word;"><?php foreach ($exegutor as $lineInfo) : ?>{!! $lineInfo['wrap_left'] !!}{{ $lineInfo['line'] }}{!! $lineInfo['wrap_right'] !!}<?php endforeach; ?></pre>
+        <div style="padding: 10px; background-color: #f4645f;">
+            <div style="color: #ffffff; margin: 0 0 0 0; font-size: 22px;">Stack trace</div>
+        </div>
+        <pre style="margin: 0 0 0 0; background: #272727; color: #aaaaaa; font-family: monospace; font-size: 12px; padding: 5px 12px; white-space: pre-wrap; word-break: break-word;">{{ $error }}</pre>
         <div style="padding: 6px; text-align: right; background-color: #f4645f;">
-            <h6 style="margin: 0; font-weight: 100; font-family: monospace; font-size: 10px;">developed by Yaro</h6>
+            <h6 style="margin: 0 0 0 0; font-weight: 100; font-family: monospace; font-size: 10px;">developed by Yaro</h6>
         </div>
         
         <table style="border-collapse: collapse;">

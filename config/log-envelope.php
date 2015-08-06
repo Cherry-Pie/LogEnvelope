@@ -15,6 +15,11 @@ return [
     'email_from' => null,
     
     /*
+     * How many lines to show near exception line.
+     */
+    'lines_count' => 12,
+    
+    /*
      * List of exceptions to skip sending.
      */
     'except' => [
