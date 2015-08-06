@@ -64,6 +64,7 @@ class LogEnvelope
         $data = [];
         
         $data['host']    = Request::server('SERVER_NAME');
+        $data['method']  = Request::method();
         $data['fullUrl'] = Request::fullUrl();
         $data['exception'] = $exception->getMessage();
         $data['error'] = $exception->getTraceAsString();

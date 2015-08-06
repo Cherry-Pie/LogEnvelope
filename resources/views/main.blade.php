@@ -8,7 +8,7 @@
         <div style="padding: 10px; background-color: #f4645f; color: white;">
             <h4 style="margin: 0; font-weight: 100;">
                 <div style="float:right;">{{ $file }}::{{ $line }}</div>
-                <div>{{ $fullUrl }}</div>
+                <div>[{{ $method }}]: {{ $fullUrl }}</div>
             </h4>
             <h1 style="margin: 0; font-size: 3em;">
                 {{ $class }}
