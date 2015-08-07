@@ -2,6 +2,10 @@
     "name": "yaro/log-envelope",
     "description": "Laravel 5 email on error",
     "keywords": ["laravel", "log", "error", "mail on error"],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.*"
+    },
     "autoload": {
         "psr-4": {
             "Yaro\\LogEnvelope\\": "src/"
@@ -12,7 +16,7 @@
         {
             "name": "Yaro",
             "email": "12fcv4@gmail.com",
-            "homepage": "http://cherry-pie.co/"
+            "homepage": "http://cherry-pie.co"
         }
     ],
     "minimum-stability": "stable"

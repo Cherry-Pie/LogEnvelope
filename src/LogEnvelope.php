@@ -2,9 +2,9 @@
 
 namespace Yaro\LogEnvelope;
 
-use Mail;
-use Request;
-use Session;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 
 
 class LogEnvelope
