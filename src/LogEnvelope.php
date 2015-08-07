@@ -107,7 +107,7 @@ class LogEnvelope
             return;
         }
         return [
-            'line' => $currentLine .'. '. $lines[$index],
+            'line' => '<span style="color:#aaaaaa;">'. $currentLine .'.</span> '. SyntaxHighlight::process($lines[$index]),
             'wrap_left' => $i ? '' : '<span style="color: #F5F5F5; background-color: #5A3E3E; width: 100%; display: block;">',
             'wrap_right' => $i ? '' : '</span>',
         ];

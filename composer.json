@@ -11,7 +11,8 @@
     "authors": [
         {
             "name": "Yaro",
-            "email": "12fcv4@gmail.com"
+            "email": "12fcv4@gmail.com",
+            "homepage": "http://cherry-pie.co/"
         }
     ],
     "minimum-stability": "stable"
