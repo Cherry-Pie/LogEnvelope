@@ -41,6 +41,10 @@ public function report(Exception $e)
 //...
 ```
 
+## Results
+Something like this with other info for debugging.
+![results](https://raw.githubusercontent.com/Cherry-Pie/LogEnvelope/master/envelope.png)
+
 
 ## License
 The MIT License (MIT). Please see [LICENSE](https://github.com/Cherry-Pie/LogEnvelope/blob/master/LICENSE) for more information.
