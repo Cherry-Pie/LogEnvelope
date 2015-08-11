@@ -13,7 +13,8 @@ You must install this service provider.
 ```php
 // config/app.php
 'providers' => [
-    //...
+    // make this very first provider
+    // so fatal exceptions can be catchable by envelope
     Yaro\LogEnvelope\ServiceProvider::class,
     //...
 ];
