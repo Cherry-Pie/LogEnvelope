@@ -2,6 +2,8 @@
 
 namespace Yaro\LogEnvelope;
 
+use Exception;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
@@ -26,33 +28,38 @@ class LogEnvelope
     
     public function send($exception)
     {
-        $config = $this->config;
-        if (!$config['email_to']) {
-            return;
-        }
-        
-        $data = $this->getEmailData($exception);
-        
-        if ($this->isSkipException($data['class'])) {
-            return;
-        }
-        
-        Mail::send('log-envelope::main', $data, function($message) use($data, $config) {
-            $subject = '[' . $data['class'] .'] @ '. $data['host'] .': ' . $data['exception'];
+        // just to make sure that package dont break all the things
+        try {
+            $config = $this->config;
+            if (!$config['email_to']) {
+                return;
+            }
             
-            // to protect from gmail's anchors automatic generating
-            $message->setBody(
-                preg_replace(
-                    ['~\.~', '~http~'], 
-                    ['<span>.</span>', '<span>http</span>'], 
-                    $message->getBody()
-                )
-            );
+            $data = $this->getEmailData($exception);
             
-            $message->to($config['email_to'])
-                    ->from($config['email_from'], 'Log Envelope')
-                    ->subject($subject);
-        });
+            if ($this->isSkipException($data['class'])) {
+                return;
+            }
+            
+            Mail::send('log-envelope::main', $data, function($message) use($data, $config) {
+                $subject = '[' . $data['class'] .'] @ '. $data['host'] .': ' . $data['exception'];
+                
+                // to protect from gmail's anchors automatic generating
+                $message->setBody(
+                    preg_replace(
+                        ['~\.~', '~http~'], 
+                        ['<span>.</span>', '<span>http</span>'], 
+                        $message->getBody()
+                    )
+                );
+                
+                $message->to($config['email_to'])
+                        ->from($config['email_from'], 'Log Envelope')
+                        ->subject($subject);
+            });
+        } catch (Exception $e) {
+            Log::error($e);
+        }
     } // end send
     
     public function isSkipException($exceptionClass)
@@ -77,9 +84,9 @@ class LogEnvelope
             'GET'     => Request::query(),
             'POST'    => $_POST,
             'FILE'    => Request::file(),
-            'OLD'     => Request::old(),
+            'OLD'     => Request::hasSession() ? Request::old() : [],
             'COOKIE'  => Request::cookie(),
-            'SESSION' => Session::all(),
+            'SESSION' => Request::hasSession() ? Session::all() : [], 
             'HEADERS' => Request::header(),
         );
         
@@ -93,6 +100,14 @@ class LogEnvelope
             $data['exegutor'][] = $this->getLineInfo($lines, $data['line'], $i);
         }
         $data['exegutor'] = array_filter($data['exegutor']);
+        
+        // to make symfony exception more readable
+        if ($data['class'] == 'Symfony\Component\Debug\Exception\FatalErrorException') {
+            preg_match("~^(.+)' in ~", $data['exception'], $matches);
+            if (isset($matches[1])) {
+                $data['exception'] = $matches[1];
+            }
+        }
         
         return $data;
     } // end getEmailData

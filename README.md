@@ -9,12 +9,12 @@ You can install the package through Composer.
 ```bash
 composer require yaro/log-envelope
 ```
-You must install this service provider.
+You must install this service provider. Make this the very first provider in list.
 ```php
 // config/app.php
 'providers' => [
-    //...
     Yaro\LogEnvelope\ServiceProvider::class,
+    //...
     //...
 ];
 ```
@@ -27,7 +27,7 @@ php artisan vendor:publish --provider="Yaro\LogEnvelope\ServiceProvider"
 >And put receiver email to it.
 
 
-Add to your Exception Handler's (```/app/Exceptions/Handler.php``` by default) ```report``` method these lines:
+Add to your Exception Handler's (```/app/Exceptions/Handler.php``` by default) ```report``` method these line:
 ```php
 //...
 public function report(Exception $e)
