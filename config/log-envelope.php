@@ -13,6 +13,15 @@ return [
      * (default value: log-envelop@your-domain.com)
      */
     'email_from' => null,
+
+    /*
+     * The name of the sender.
+     * 
+     * (default value: Log Envelope)
+     */
+
+    'email_from_name' => '',
+
     
     /*
      * How many lines to show near exception line.

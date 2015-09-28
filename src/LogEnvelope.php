@@ -19,6 +19,7 @@ class LogEnvelope
         $this->config['except'] = config('yaro.log-envelope.except', []);
         $this->config['email_to'] = config('yaro.log-envelope.email_to');
         $this->config['email_from'] = config('yaro.log-envelope.email_from');
+        $this->config['email_from_name'] = config('yaro.log-envelope.email_from_name', 'Log Envelope');
         $this->config['count'] = config('yaro.log-envelope.lines_count', 12);
         
         if (!$this->config['email_from']) {
@@ -54,7 +55,7 @@ class LogEnvelope
                 );
                 
                 $message->to($config['email_to'])
-                        ->from($config['email_from'], 'Log Envelope')
+                        ->from($config['email_from'], $config['email_from_name'])
                         ->subject($subject);
             });
         } catch (Exception $e) {
