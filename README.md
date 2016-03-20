@@ -34,11 +34,12 @@ Add to your Exception Handler's (```/app/Exceptions/Handler.php``` by default) `
 //...
 public function report(Exception $e)
 {
-    \LogEnvelope::send($e); // <- yeah, that line
+    $res = parent::report($e);
     
+    \LogEnvelope::send($e);
     //...
     
-    return parent::report($e); 
+    return $res; 
 }
 //...
 ```
