@@ -1,6 +1,4 @@
-<?php
-
-namespace Yaro\LogEnvelope\Models;
+<?php namespace Yaro\LogEnvelope\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

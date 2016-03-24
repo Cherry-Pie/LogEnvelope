@@ -4,9 +4,14 @@ return [
 
     /*
      * Log emails receiver email.
+     * This can also be an array to send to multiple receivers :)
+     * [
+     *   'example@example.com',
+     *   'exaple2@example2.com'
+     * ]
      */
     'email_to' => '',
-    
+
     /*
      * From email.
      * 
@@ -15,17 +20,17 @@ return [
     'email_from' => null,
 
     /*
-     * Decide wether it should queue
+     * Decide wether it should queue the e-mails
      *
      */
-    'should_queue' => true,
+    'should_queue' => false,
 
     /*
      * Decide where to log to
      *
-     * Options: mail, database
+     * Options: mail, database or both
      */
-    'log_to' => 'mail',
+    'log_to' => 'database',
 
     /*
      * The name of the sender.
@@ -35,17 +40,17 @@ return [
 
     'email_from_name' => '',
 
-    
+
     /*
      * How many lines to show near exception line.
      */
     'lines_count' => 12,
-    
+
     /*
      * List of exceptions to skip sending.
      */
     'except' => [
         //'Symfony\Component\HttpKernel\Exception\NotFoundHttpException',
     ],
-    
+
 ];
