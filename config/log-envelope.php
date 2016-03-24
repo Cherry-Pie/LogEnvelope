@@ -21,6 +21,13 @@ return [
     'should_queue' => true,
 
     /*
+     * Decide where to log to
+     *
+     * Options: mail, database
+     */
+    'log_to' => 'mail',
+
+    /*
      * The name of the sender.
      * 
      * (default value: Log Envelope)

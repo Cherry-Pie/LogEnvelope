@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Yaro\LogEnvelope\Models\ExceptionModel;
 
 
 class LogEnvelope
@@ -22,6 +23,7 @@ class LogEnvelope
         $this->config['email_from_name'] = config('yaro.log-envelope.email_from_name', 'Log Envelope');
         $this->config['count'] = config('yaro.log-envelope.lines_count', 12);
         $this->config['should_queue'] = config('yaro.log-envelope.should_queue', true);
+        $this->config['log_to'] = config('yaro.log-envelope.log_to', 'mail');
 
         if (!$this->config['email_from']) {
             $this->config['email_from'] = 'log-envelop@'. Request::server('SERVER_NAME');
@@ -30,6 +32,14 @@ class LogEnvelope
     
     public function send($exception)
     {
+        $data = $this->getEmailData($exception);
+        if($this->config['log_to'] == 'database'){
+            unset($data['exegutor']);
+            unset($data['storage']);
+            dd(ExceptionModel::create($data));
+        }
+
+        
         // just to make sure that package dont break all the things
         try {
             $config = $this->config;
@@ -107,21 +117,21 @@ class LogEnvelope
             'FILE'    => Request::file(),
             'OLD'     => Request::hasSession() ? Request::old() : [],
             'COOKIE'  => Request::cookie(),
-            'SESSION' => Request::hasSession() ? Session::all() : [], 
+            'SESSION' => Request::hasSession() ? Session::all() : [],
             'HEADERS' => Request::header(),
         );
-        
+
         $data['storage'] = array_filter($data['storage']);
-        
+
         $count = $this->config['count'];
         $lines = file($data['file']);
         $data['exegutor'] = [];
-        
+
         for ($i = -1 * abs($count); $i <= abs($count); $i++) {
             $data['exegutor'][] = $this->getLineInfo($lines, $data['line'], $i);
         }
         $data['exegutor'] = array_filter($data['exegutor']);
-        
+
         // to make symfony exception more readable
         if ($data['class'] == 'Symfony\Component\Debug\Exception\FatalErrorException') {
             preg_match("~^(.+)' in ~", $data['exception'], $matches);

@@ -13,6 +13,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->publishes([
             __DIR__.'/../config/log-envelope.php' => config_path('yaro.log-envelope.php'),
         ]);
+
+        if (!class_exists('CreateExceptionsTable')) {
+            // Publish the migration
+            $timestamp = date('Y_m_d_His', time());
+            $this->publishes([
+                __DIR__.'/../resources/migrations/create_exceptions_table.php.stub' => database_path('migrations/'.$timestamp.'_create_exceptions_table.php'),
+            ], 'migrations');
+        }
         
         $this->app['view']->addNamespace('log-envelope', __DIR__ . '/../resources/views');
         
