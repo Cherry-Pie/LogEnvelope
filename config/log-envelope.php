@@ -15,6 +15,12 @@ return [
     'email_from' => null,
 
     /*
+     * Decide wether it should queue
+     *
+     */
+    'should_queue' => true,
+
+    /*
      * The name of the sender.
      * 
      * (default value: Log Envelope)

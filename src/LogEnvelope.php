@@ -21,7 +21,8 @@ class LogEnvelope
         $this->config['email_from'] = config('yaro.log-envelope.email_from');
         $this->config['email_from_name'] = config('yaro.log-envelope.email_from_name', 'Log Envelope');
         $this->config['count'] = config('yaro.log-envelope.lines_count', 12);
-        
+        $this->config['should_queue'] = config('yaro.log-envelope.should_queue', true);
+
         if (!$this->config['email_from']) {
             $this->config['email_from'] = 'log-envelop@'. Request::server('SERVER_NAME');
         }
@@ -41,23 +42,42 @@ class LogEnvelope
             if ($this->isSkipException($data['class'])) {
                 return;
             }
-            
-            Mail::send('log-envelope::main', $data, function($message) use($data, $config) {
-                $subject = '[' . $data['class'] .'] @ '. $data['host'] .': ' . $data['exception'];
-                
-                // to protect from gmail's anchors automatic generating
-                $message->setBody(
-                    preg_replace(
-                        ['~\.~', '~http~'], 
-                        ['<span>.</span>', '<span>http</span>'], 
-                        $message->getBody()
-                    )
-                );
-                
-                $message->to($config['email_to'])
+
+            if($this->config['should_queue']) {
+                Mail::queue('log-envelope::main', $data, function ($message) use ($data, $config) {
+                    $subject = '[' . $data['class'] . '] @ ' . $data['host'] . ': ' . $data['exception'];
+
+                    // to protect from gmail's anchors automatic generating
+                    $message->setBody(
+                        preg_replace(
+                            ['~\.~', '~http~'],
+                            ['<span>.</span>', '<span>http</span>'],
+                            $message->getBody()
+                        )
+                    );
+
+                    $message->to($config['email_to'])
                         ->from($config['email_from'], $config['email_from_name'])
                         ->subject($subject);
-            });
+                });
+            }else{
+                Mail::send('log-envelope::main', $data, function ($message) use ($data, $config) {
+                    $subject = '[' . $data['class'] . '] @ ' . $data['host'] . ': ' . $data['exception'];
+
+                    // to protect from gmail's anchors automatic generating
+                    $message->setBody(
+                        preg_replace(
+                            ['~\.~', '~http~'],
+                            ['<span>.</span>', '<span>http</span>'],
+                            $message->getBody()
+                        )
+                    );
+
+                    $message->to($config['email_to'])
+                        ->from($config['email_from'], $config['email_from_name'])
+                        ->subject($subject);
+                });
+            }
         } catch (Exception $e) {
             Log::error($e);
         }
