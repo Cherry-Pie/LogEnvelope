@@ -1,9 +1,6 @@
-<?php 
+<?php namespace Yaro\LogEnvelope;
 
-namespace Yaro\LogEnvelope;
-
-
-class Facade extends \Illuminate\Support\Facades\Facade 
+class Facade extends \Illuminate\Support\Facades\Facade
 {
 
     /**
@@ -11,9 +8,8 @@ class Facade extends \Illuminate\Support\Facades\Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() 
+    protected static function getFacadeAccessor()
     {
-        return 'yaro.log-envelope'; 
-    } // end getFacadeAccessor
- 
+        return 'yaro.log-envelope';
+    }
 }
