@@ -1,6 +1,9 @@
-<?php namespace Yaro\LogEnvelope\Models;
+<?php 
+
+namespace Yaro\LogEnvelope\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 
 class ExceptionModel extends Model
 {
@@ -12,4 +15,5 @@ class ExceptionModel extends Model
      * @var string
      */
     protected $table = 'exceptions';
+    
 }

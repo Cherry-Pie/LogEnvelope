@@ -1,4 +1,6 @@
-<?php namespace Yaro\LogEnvelope;
+<?php 
+
+namespace Yaro\LogEnvelope;
 
 class Facade extends \Illuminate\Support\Facades\Facade
 {
