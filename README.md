@@ -57,8 +57,17 @@ Also there is ```force_config``` option, where you can define which configs to o
 
 ## Results
 Something like this with other info for debugging.
+- - -
+Email:
+
 ![results](https://raw.githubusercontent.com/Cherry-Pie/LogEnvelope/master/envelope-email.png)
+- - -
+Slack:
+
 ![results](https://raw.githubusercontent.com/Cherry-Pie/LogEnvelope/master/envelope-slack.jpg)
+- - -
+Telegram:
+
 ![results](https://raw.githubusercontent.com/Cherry-Pie/LogEnvelope/master/envelope-telegram.jpg)
 
 
