@@ -20,8 +20,9 @@ class Database extends AbstractDriver
         
         $data = $this->data;
         
-        unset($data['exegutor']);
-        unset($data['storage']);
+        $data['exegutor'] = implode('<br>', $data['exegutor']);
+        $data['lines'] = implode('<br>', $data['lines']);
+        $data['storage'] = print_r($data['storage'], true);
 
         $model = $this->config['model'];
         $model::create($data);
