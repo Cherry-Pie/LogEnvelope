@@ -16,14 +16,7 @@
         {
             "name": "Yaro",
             "email": "12fcv4@gmail.com",
-            "homepage": "http://cherry-pie.co",
-            "role": "Owner"
-        },
-        {
-            "name": "Dennis Smink",
-            "email": "dennissmink@gmail.com",
-            "homepage": "http://www.dennissmink.nl",
-            "role": "Developer"
+            "homepage": "http://cherry-pie.co"
         }
     ],
     "minimum-stability": "stable"

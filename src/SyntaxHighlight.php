@@ -1,24 +1,27 @@
-<?php namespace Yaro\LogEnvelope;
+<?php
 
-class SyntaxHighlight
+namespace Yaro\LogEnvelope;
+
+
+class SyntaxHighlight 
 {
-
+    
     private $tokens = array();
-
+    
     public static function process($s)
     {
         $class = get_called_class();
         $obj = new $class;
-
+        
         return $obj->highlight($s);
     } // end process
-
-    public function highlight($s)
+    
+    public function highlight($s) 
     {
         $s = htmlspecialchars($s);
 
         // Workaround for escaped backslashes
-        $s = str_replace('\\\\', '\\\\<e>', $s);
+        $s = str_replace('\\\\','\\\\<e>', $s); 
 
         $regexp = array(
             // Numbers (also look for Hex)
@@ -63,9 +66,9 @@ class SyntaxHighlight
                 (?<!\\\)&quot;.*?(?<!\\\)&quot;|
                 (?<!\\\)\'(.*?)(?<!\\\)\'
             )/isx', [$this, 'replaceId'], $s);
-
+            
         $s = preg_replace(array_keys($regexp), array_values($regexp), $s);
-
+        
         // Paste the comments and strings back in again
         $s = str_replace(array_keys($this->tokens), array_values($this->tokens), $s);
 
@@ -82,18 +85,19 @@ class SyntaxHighlight
      * This way, strings and comments will be stripped out and wont be processed
      * by the other expressions searching for keywords etc.
      */
-    private function replaceId($matches)
+    private function replaceId($matches) 
     {
         $match = $matches[0];
         $id = "##r" . uniqid() . "##";
 
         // String or Comment?
-        if (substr($match, 0, 2) == '//' || substr($match, 0, 2) == '/*' || substr($match, 0, 2) == '##' || substr($match, 0, 7) == '&lt;!--') {
+        if(substr($match, 0, 2) == '//' || substr($match, 0, 2) == '/*' || substr($match, 0, 2) == '##' || substr($match, 0, 7) == '&lt;!--') {
             $this->tokens[$id] = '<span style="color:#7F9F7F">' . $match . '</span>';
         } else {
             $this->tokens[$id] = '<span style="color:#CC9385">' . $match . '</span>';
         }
         return $id;
     } // end replaceId
+    
 }
 
