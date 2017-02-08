@@ -42,7 +42,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             'config/yaro.log-envelope.php',
         ]);
 
-        $this->app['yaro.log-envelope'] = $this->app->share(function ($app) {
+        $this->app->singleton('yaro.log-envelope', function ($app) {
             return new LogEnvelope();
         });
     }
