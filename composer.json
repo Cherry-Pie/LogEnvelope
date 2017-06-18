@@ -16,7 +16,8 @@
         {
             "name": "Yaro",
             "email": "12fcv4@gmail.com",
-            "homepage": "http://cherry-pie.co"
+            "homepage": "http://cherry-pie.co",
+            "role": "Owner"
         }
     ],
     "minimum-stability": "stable"
