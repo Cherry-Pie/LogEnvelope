@@ -27,7 +27,7 @@ class Mail extends AbstractDriver
         $data = $this->data;
         $config = $this->config;
         
-        MailFacade::queue('log-envelope::main', $data, function ($message) use ($data, $config) {
+        MailFacade::queue('log-envelope::main', $data, function($message) use ($data, $config) {
             $subject = sprintf('[%s] @ %s: %s', $data['class'], $data['host'], $data['exception']);
 
             // to protect from gmail's anchors automatic generating

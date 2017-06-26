@@ -5,7 +5,6 @@ namespace Yaro\LogEnvelope;
 use Exception;
 use SplFileObject;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Yaro\LogEnvelope\Drivers\DriverFactory;
@@ -105,7 +104,7 @@ class LogEnvelope
         $file = new SplFileObject($data['file']);
         for ($i = -1 * abs($count); $i <= abs($count); $i++) {
             list($line, $exegutorLine) = $this->getLineInfo($file, $data['line'], $i);
-            $data['exegutor'][]   = $exegutorLine;
+            $data['exegutor'][] = $exegutorLine;
             $data['file_lines'][$data['line'] + $i] = $line;
         }
 
@@ -120,6 +119,9 @@ class LogEnvelope
         return $data;
     } // end getExceptionData
 
+    /**
+     * @param SplFileObject $file
+     */
     private function getLineInfo($file, $line, $i)
     {
         $currentLine = $line + $i;
