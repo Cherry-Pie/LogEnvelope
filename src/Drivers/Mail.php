@@ -3,6 +3,7 @@
 namespace Yaro\LogEnvelope\Drivers;
 
 use Illuminate\Support\Facades\Mail as MailFacade;
+use Yaro\LogEnvelope\Mail\LogEmail;
 
 class Mail extends AbstractDriver
 {
@@ -27,22 +28,7 @@ class Mail extends AbstractDriver
         $data = $this->data;
         $config = $this->config;
         
-        MailFacade::queue('log-envelope::main', $data, function($message) use ($data, $config) {
-            $subject = sprintf('[%s] @ %s: %s', $data['class'], $data['host'], $data['exception']);
-
-            // to protect from gmail's anchors automatic generating
-            $message->setBody(
-                preg_replace(
-                    ['~\.~', '~http~'],
-                    ['<span>.</span>', '<span>http</span>'],
-                    $message->getBody()
-                )
-            );
-
-            $message->to($config['to'])
-                ->from($config['from_email'], $config['from_name'])
-                ->subject($subject);
-        });
+        MailFacade::queue(new LogEmail($data, $config));
     } // end send
     
 }
