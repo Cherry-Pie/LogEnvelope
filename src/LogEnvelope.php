@@ -86,7 +86,7 @@ class LogEnvelope
         $data['storage'] = array(
             'SERVER'  => Request::server(),
             'GET'     => Request::query(),
-            'POST'    => Request::request(),
+            'POST'    => Request::instance()->request->all(),
             'FILE'    => Request::file(),
             'OLD'     => Request::hasSession() ? Request::old() : [],
             'COOKIE'  => Request::cookie(),
