@@ -4,6 +4,7 @@ Laravel 5 package for logging errors to your e-mail(s), telegram, slack and data
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Cherry-Pie/LogEnvelope/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Cherry-Pie/LogEnvelope/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/Cherry-Pie/LogEnvelope/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Cherry-Pie/LogEnvelope/build-status/master)
+[![Total Downloads](https://poser.pugx.org/yaro/log-envelope/downloads)](https://packagist.org/packages/yaro/log-envelope)
 
 ## Installation 
 
