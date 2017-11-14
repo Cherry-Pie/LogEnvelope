@@ -86,7 +86,7 @@ class LogEnvelope
         $data['storage'] = array(
             'SERVER'  => Request::server(),
             'GET'     => Request::query(),
-            'POST'    => Request::instance()->request->all(),
+            'POST'    => $_POST,
             'FILE'    => Request::file(),
             'OLD'     => Request::hasSession() ? Request::old() : [],
             'COOKIE'  => Request::cookie(),
@@ -104,6 +104,9 @@ class LogEnvelope
         $file = new SplFileObject($data['file']);
         for ($i = -1 * abs($count); $i <= abs($count); $i++) {
             list($line, $exegutorLine) = $this->getLineInfo($file, $data['line'], $i);
+            if (!$line && !$exegutorLine) {
+                continue;
+            }
             $data['exegutor'][] = $exegutorLine;
             $data['file_lines'][$data['line'] + $i] = $line;
         }
@@ -127,6 +130,9 @@ class LogEnvelope
         $currentLine = $line + $i;
         // cuz array starts with 0, when file lines start count from 1
         $index = $currentLine - 1;
+        if ($index < 0) {
+            return [false, false];
+        }
         $file->seek($index);
 
         return [
