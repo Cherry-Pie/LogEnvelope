@@ -45,6 +45,8 @@ public function report(Exception $e)
 
 Change config ```yaro.log-envelope.php``` for your needs. You can choose to log your errors to your database or send them to your email/telegram/slack. Emails are preferable, cuz they contains more debug information, such as traceback.
 
+There is a ```censored_fields``` option which will change any fields value to `*****` if it is named in this array. For example by default it will change values for fields called `password` to `*****`.
+
 Also there is ```force_config``` option, where you can define which configs to override for LogEnvelope execution. E.g., if you using some smtp for mail sending and queue it, you can change configs to send LogEnvelope emails immediately and not via smtp:
 ```
 'force_config' => [
