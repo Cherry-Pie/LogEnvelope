@@ -58,4 +58,11 @@ return [
         'Symfony\Component\Process\Exception\ProcessTimedOutException',
     ],
 
+    /*
+     * List of fields to censor
+     */
+    'censored_fields' => [
+        'password',
+    ],
+
 ];
