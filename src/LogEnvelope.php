@@ -11,12 +11,12 @@ use Yaro\LogEnvelope\Drivers\DriverFactory;
 
 class LogEnvelope
 {
-    
     private $config = [];
     private $cachedConfig = [];
 
     public function __construct()
     {
+        $this->config['censored_fields'] = config('yaro.log-envelope.censored_fields', ['password']);
         $this->config['except'] = config('yaro.log-envelope.except', []);
         $this->config['count'] = config('yaro.log-envelope.lines_count', 6);
         $this->config['drivers'] = config('yaro.log-envelope.drivers', []);
@@ -25,7 +25,7 @@ class LogEnvelope
     public function send($exception)
     {
         $this->onBefore();
-        
+
         try {
             $data = $this->getExceptionData($exception);
 
@@ -94,7 +94,11 @@ class LogEnvelope
             'HEADERS' => Request::header(),
         );
 
+        // Remove empty, false and null values
         $data['storage'] = array_filter($data['storage']);
+
+        // Censor sensitive field values
+        array_walk_recursive($data['storage'], 'self::censorSensitiveFields');
 
         $count = $this->config['count'];
         
@@ -123,6 +127,20 @@ class LogEnvelope
     } // end getExceptionData
 
     /**
+     * Set the value of specified fields to *****
+     *
+     * @param string $value
+     * @param string $key
+     * @return void
+     */
+    public function censorSensitiveFields(&$value, $key)
+    {
+        if (in_array($key, $this->config['censored_fields'], true)) {
+            $value = '*****';
+        }
+    }
+
+    /**
      * @param SplFileObject $file
      */
     private function getLineInfo($file, $line, $i)
@@ -144,6 +162,4 @@ class LogEnvelope
             ]
         ];
     } // end getLineInfo
-
 }
-
