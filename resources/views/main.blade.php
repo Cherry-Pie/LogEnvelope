@@ -3,6 +3,15 @@
     <head>
         <meta charset="utf-8">
         <title>Log Envelope</title>
+        <style>
+            /* 
+                Fix Apple Mail auto linking and coloring them as 
+                blue which is unreadable on the blue background. 
+            */
+            a {
+                color: white;
+            }
+        </style>
     </head>
     <body style="margin: 0px; padding: 0px;">
         <div style="padding: 10px; background-color: #55688A; color: white;">
