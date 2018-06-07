@@ -40,8 +40,8 @@ return [
      * Change config for LogEnvelope execution.
      */
     'force_config' => [
-        'mail.driver' => 'sendmail',
-        'queue.default' => 'sync',
+        // 'mail.driver' => 'sendmail',
+        // 'queue.default' => 'sync',
     ],
 
     /*
