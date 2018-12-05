@@ -13,23 +13,25 @@ class CreateExceptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('exceptions', function (Blueprint $table) {
-            $table->increments('id');
+        if (!Schema::hasTable('exceptions')) {
+            Schema::create('exceptions', function (Blueprint $table) {
+                $table->increments('id');
 
-            $table->string('host');
-            $table->string('method');
-            $table->string('fullUrl');
-            $table->text('exception');
-            $table->text('error');
-            $table->string('line');
-            $table->string('file');
-            $table->string('class');
-            $table->text('storage');
-            $table->text('exegutor');
-            $table->text('file_lines');
+                $table->string('host');
+                $table->string('method');
+                $table->string('fullUrl');
+                $table->text('exception');
+                $table->text('error');
+                $table->string('line');
+                $table->string('file');
+                $table->string('class');
+                $table->text('storage');
+                $table->text('exegutor');
+                $table->text('file_lines');
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
     
     /**
@@ -37,7 +39,9 @@ class CreateExceptionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('exceptions');
+        if (Schema::hasTable('exceptions')) {
+            gSchema::drop('exceptions');
+        }
     }
     
 }
