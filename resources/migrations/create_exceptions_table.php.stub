@@ -40,7 +40,7 @@ class CreateExceptionsTable extends Migration
     public function down()
     {
         if (Schema::hasTable('exceptions')) {
-            gSchema::drop('exceptions');
+            Schema::drop('exceptions');
         }
     }
     
