@@ -21,7 +21,7 @@ class Database extends AbstractDriver
         
         $data['exegutor'] = implode('<br>', array_map($data['exegutor'], function ($item) {
             return $item['wrap_left'] . $item['line'] . $item['wrap_right'];
-        });
+        }));
         $data['lines'] = implode("\n", $data['lines']);
         $data['storage'] = json_encode($data['storage']);
 
