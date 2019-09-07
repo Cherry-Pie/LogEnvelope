@@ -6,11 +6,10 @@ use Yaro\LogEnvelope\Models\ExceptionModel;
 
 class Database extends AbstractDriver
 {
-            
     protected function check() 
     {
         return $this->isEnabled();
-    } // end check
+    }
     
     public function send()
     {
@@ -20,12 +19,13 @@ class Database extends AbstractDriver
         
         $data = $this->data;
         
-        $data['exegutor'] = implode('<br>', $data['exegutor']);
-        $data['lines'] = implode('<br>', $data['lines']);
-        $data['storage'] = print_r($data['storage'], true);
+        $data['exegutor'] = implode('<br>', array_map($data['exegutor'], function ($item) {
+            return $item['wrap_left'] . $item['line'] . $item['wrap_right']);
+        });
+        $data['lines'] = implode("\n", $data['lines']);
+        $data['storage'] = json_encode($data['storage']);
 
         $model = $this->config['model'];
         $model::create($data);
-    } // end send
-    
+    }
 }
