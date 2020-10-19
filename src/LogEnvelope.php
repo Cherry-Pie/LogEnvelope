@@ -152,6 +152,10 @@ class LogEnvelope
             return [false, false];
         }
         $file->seek($index);
+        
+        if($file->eof()) {
+            return [false, false];
+        }
 
         return [
             $file->__toString(),
