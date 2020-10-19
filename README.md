@@ -1,6 +1,6 @@
 # Log Envelope
 
-Laravel 5|6|7 package for logging errors to your e-mail(s), telegram, slack and database!
+Laravel 5-8 package for logging errors to your e-mail(s), telegram, slack and database!
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Cherry-Pie/LogEnvelope/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Cherry-Pie/LogEnvelope/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/Cherry-Pie/LogEnvelope/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Cherry-Pie/LogEnvelope/build-status/master)
