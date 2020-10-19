@@ -153,7 +153,7 @@ class LogEnvelope
         }
         $file->seek($index);
         
-        if($file->eof()) {
+        if ($file->eof()) {
             return [false, false];
         }
 
