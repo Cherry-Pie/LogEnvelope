@@ -158,9 +158,9 @@ class LogEnvelope
         }
 
         return [
-            $file->__toString(),
+            $file->current(),
             [
-                'line' => '<span style="color:#aaaaaa;">' . $currentLine . '.</span> ' . SyntaxHighlight::process($file->__toString()),
+                'line' => '<span style="color:#aaaaaa;">' . $currentLine . '.</span> ' . SyntaxHighlight::process($file->current()),
                 'wrap_left' => $i ? '' : '<span style="color: #F5F5F5; background-color: #5A3E3E; width: 100%; display: block;">',
                 'wrap_right' => $i ? '' : '</span>',
             ]
