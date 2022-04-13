@@ -17,7 +17,7 @@ class SyntaxHighlight
 
     public function highlight($s)
     {
-        $s = htmlspecialchars($s);
+        $s = htmlspecialchars($s, ENT_COMPAT);
 
         // Workaround for escaped backslashes
         $s = str_replace('\\\\', '\\\\<e>', $s);
