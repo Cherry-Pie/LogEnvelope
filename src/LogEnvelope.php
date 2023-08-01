@@ -98,7 +98,7 @@ class LogEnvelope
         $data['storage'] = array_filter($data['storage']);
 
         // Censor sensitive field values
-        array_walk_recursive($data['storage'], 'self::censorSensitiveFields');
+        array_walk_recursive($data['storage'], self::censorSensitiveFields(...));
 
         $count = $this->config['count'];
         
